@@ -911,8 +911,9 @@ function doSubmit(e){
   e.preventDefault();
   const btn = e.target.querySelector('.fsub');
   btn.textContent = '✓ Message Sent!';
-  btn.style.background = 'var(--green)';
-  setTimeout(()=>{btn.textContent='Send Message to Alexander →';btn.style.background='';e.target.reset();},3000);
+  const data = new FormData(e.target);
+  fetch('https://formspree.io/f/xojpagbe',{method:'POST',body:data,headers:{'Accept':'application/json'}})
+  .then(()=>{btn.textContent='✓ Message Sent!';btn.style.background='var(--green)';setTimeout(()=>{btn.textContent='Send Message to Alexander →';btn.style.background='';e.target.reset();},3000);});
 }
 
 // ── REFERRAL TRACKER ──
